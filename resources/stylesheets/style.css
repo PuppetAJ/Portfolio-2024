@@ -1,0 +1,158 @@
+/* Universal Style Reset */
+
+/* Reset all margins and paddings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: white;
+}
+
+/* Reset font styles */
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Reset list styles */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Reset anchor styles */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Reset heading styles */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+
+/* Reset form styles */
+input,
+textarea,
+button {
+  border: none;
+  outline: none;
+}
+
+/* Custom Styles */
+
+:root {
+  font-size: 16px;
+}
+
+.mulish-reg {
+  font-family: "Mulish", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+body {
+  background-color: rgb(5, 5, 5);
+}
+
+/* Header Styles */
+
+header {
+  /* diameter of the circle */
+  --d: 1px;
+
+  background: radial-gradient(
+      circle at var(--d) var(--d),
+      rgba(255, 255, 255, 0.4) calc(var(--d) - 1px),
+      #1f1f1f00 var(--d)
+    )
+    0 0 / 16px 16px;
+
+  height: 100vh;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.hero h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  margin: 0.75rem;
+}
+
+.hero h4 {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+}
+
+.hero button {
+  background-color: white;
+  color: rgb(0, 0, 0);
+  width: 7.5rem;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-weight: 600;
+}
+
+.hero button:first-child {
+  margin-right: 1rem;
+}
+
+.hero button:last-child {
+  background-color: rgb(31, 34, 54);
+  color: white;
+}
+
+.hero span {
+  width: fit-content;
+  margin: 0;
+  /* font-size: 150px; */
+  /* font-weight: bold; */
+  color: transparent;
+  background: linear-gradient(to left, rgb(248, 108, 253), rgb(80, 102, 228));
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.focus {
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 3;
+  height: 100%;
+  width: 100vw;
+  -webkit-mask-image: radial-gradient(ellipse at center, transparent 25%, #000);
+  mask-image: radial-gradient(ellipse at center, transparent 25%, #000);
+  backdrop-filter: brightness(0.15);
+}
+
+.hero-content {
+  text-align: center;
+  position: relative;
+  z-index: 5;
+}
+
+#canvas {
+  position: absolute;
+  z-index: -1;
+  opacity: 0.75;
+}
