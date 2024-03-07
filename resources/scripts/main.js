@@ -14,7 +14,7 @@ let time = 0,
   r1;
 
 // Spacing options
-// 4, 5, 6, 8,
+// 3, 4, 5, 6, 7, 8, 9
 
 // 0.9
 const MAX_OFFSET = 450;
@@ -24,45 +24,7 @@ const PEAK = MAX_OFFSET;
 const POINTS_PER_LAP = 5;
 const SHADOW_STRENGTH = 10;
 
-setup();
-
-function setup() {
-  resize();
-  step();
-
-  window.addEventListener("resize", resize);
-  window.addEventListener("mousedown", onMouseDown);
-  document.addEventListener("touchstart", onTouchStart);
-}
-
-function resize() {
-  width = canvas.width = window.innerWidth;
-  height = canvas.height = window.innerHeight;
-
-  if (window.innerWidth > 1500) {
-    r1 = window.innerWidth * 0.5;
-  } else if (window.innerWidth <= 1500 && window.innerWidth > 1000) {
-    r1 = 700;
-  } else if (window.innerWidth <= 1000) {
-    r1 = 450;
-  }
-}
-
-function step() {
-  time += velocity;
-  velocity += (velocityTarget - velocity) * 0.3;
-
-  clear();
-  render();
-
-  requestAnimationFrame(step);
-}
-
-function clear() {
-  context.clearRect(0, 0, width, height);
-}
-
-function render() {
+const render = () => {
   let x,
     y,
     cx = width / 2,
@@ -100,14 +62,6 @@ function render() {
     y -= 15;
 
     y = Math.floor(y);
-    if (i === 112) {
-      y = cy;
-    }
-
-    // const center = Math.floor(POINTS / 2);
-    // if (i === center) {
-    //   y = cy;
-    // }
 
     context.globalAlpha = 1 - value / MAX_OFFSET;
     context.shadowBlur = SHADOW_STRENGTH * o;
@@ -122,17 +76,17 @@ function render() {
   // context.lineTo(cx, cy - 500);
   // context.lineTo(cx, 0);
   // context.stroke();
-}
+};
 
-function onMouseDown(event) {
+const onMouseDown = (event) => {
   lastX = event.clientX;
   lastY = event.clientY;
 
   document.addEventListener("mousemove", onMouseMove);
   document.addEventListener("mouseup", onMouseUp);
-}
+};
 
-function onMouseMove(event) {
+const onMouseMove = (event) => {
   let vx = (event.clientX - lastX) / 100;
   let vy = (event.clientY - lastY) / 100;
 
@@ -143,14 +97,14 @@ function onMouseMove(event) {
 
   lastX = event.clientX;
   lastY = event.clientY;
-}
+};
 
-function onMouseUp() {
+const onMouseUp = () => {
   document.removeEventListener("mousemove", onMouseMove);
   document.removeEventListener("mouseup", onMouseUp);
-}
+};
 
-function onTouchStart(event) {
+const onTouchStart = (event) => {
   event.preventDefault();
 
   lastX = event.touches[0].clientX;
@@ -158,9 +112,9 @@ function onTouchStart(event) {
 
   document.addEventListener("touchmove", onTouchMove);
   document.addEventListener("touchend", onTouchEnd);
-}
+};
 
-function onTouchMove(event) {
+const onTouchMove = (event) => {
   let vx = (event.touches[0].clientX - lastX) / 100;
   let vy = (event.touches[0].clientY - lastY) / 100;
 
@@ -171,9 +125,80 @@ function onTouchMove(event) {
 
   lastX = event.touches[0].clientX;
   lastY = event.touches[0].clientY;
-}
+};
 
-function onTouchEnd() {
+const onTouchEnd = () => {
   document.removeEventListener("touchmove", onTouchMove);
   document.removeEventListener("touchend", onTouchEnd);
-}
+};
+
+const resize = () => {
+  width = canvas.width = window.innerWidth;
+  height = canvas.height = window.innerHeight;
+
+  if (window.innerWidth > 1500) {
+    r1 = window.innerWidth * 0.5;
+  } else if (window.innerWidth <= 1500 && window.innerWidth > 1000) {
+    r1 = 700;
+  } else if (window.innerWidth <= 1000) {
+    r1 = 450;
+  }
+};
+
+const clear = () => {
+  context.clearRect(0, 0, width, height);
+};
+
+const step = () => {
+  time += velocity;
+  velocity += (velocityTarget - velocity) * 0.3;
+
+  clear();
+  render();
+
+  requestAnimationFrame(step);
+};
+
+const setup = () => {
+  resize();
+  step();
+
+  window.addEventListener("resize", resize);
+  window.addEventListener("mousedown", onMouseDown);
+  document.addEventListener("touchstart", onTouchStart);
+};
+
+setup();
+
+const parentList = document.querySelector(".nav-list");
+const parentWrapper = document.querySelector(".nav-wrapper");
+let open = [];
+
+const closeNav = (e) => {
+  if (
+    e.target.classList.contains("nav-wrapper") ||
+    e.relatedTarget.tagName.toLowerCase() === "li"
+  ) {
+    open.forEach((el) => {
+      el.removeChild(el.querySelector(".nav-dropdown"));
+    });
+    open = [];
+    parentWrapper.removeEventListener("mouseout", closeNav);
+  }
+};
+
+parentWrapper.addEventListener("mouseover", (event) => {
+  targetEl = event.target.tagName.toLowerCase();
+
+  const navList = document.createElement("div");
+
+  navList.classList.add("nav-dropdown");
+
+  navList.innerHTML = "Hello";
+
+  if (targetEl === "li") {
+    open.push(event.target);
+    event.target.appendChild(navList);
+    parentWrapper.addEventListener("mouseout", closeNav);
+  }
+});

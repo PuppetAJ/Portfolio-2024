@@ -5,7 +5,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  color: white;
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 /* Reset font styles */
@@ -49,6 +50,7 @@ button {
 
 :root {
   font-size: 16px;
+  color: white;
 }
 
 .mulish-reg {
@@ -81,6 +83,13 @@ header {
     0 0 / 16px 16px;
 
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.head-wrapper {
+  flex-grow: 1;
+  margin-bottom: 6rem;
 }
 
 .hero {
@@ -94,13 +103,14 @@ header {
 
 .hero h1 {
   font-size: 4rem;
-  font-weight: 700;
+  font-weight: 800;
   margin: 0.75rem;
 }
 
 .hero h4 {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.9rem;
+  color: rgb(255, 255, 255);
+  font-size: 1rem;
+  opacity: 0.9;
 }
 
 .hero button {
@@ -110,7 +120,7 @@ header {
   font-size: 1rem;
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .hero button:first-child {
@@ -152,11 +162,52 @@ header {
   z-index: 5;
   filter: drop-shadow(0 0 0.5rem rgba(0, 0, 0, 1));
   text-shadow: 0 0 0.5rem rgba(0, 0, 0, 1);
-  /* opacity: 0; */
 }
 
 #canvas {
   position: absolute;
   z-index: -1;
   opacity: 0.7;
+  overflow: hidden;
+}
+
+nav {
+  position: relative;
+  z-index: 300;
+  display: flex;
+  justify-content: center;
+  overflow: visible;
+}
+
+.nav-wrapper {
+  margin-top: 0.75rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  min-height: 4rem;
+  border-radius: 4rem;
+  width: 35rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: visible;
+}
+
+.nav-list {
+  display: flex;
+  gap: 1.5rem;
+  overflow: visible;
+}
+
+.list-item {
+  position: relative;
+  cursor: pointer;
+  overflow: visible;
+}
+
+.nav-dropdown {
+  position: absolute;
+  background-color: red;
+  padding: 1rem;
+  left: calc(-55%);
+  margin-top: 0.5rem;
 }
