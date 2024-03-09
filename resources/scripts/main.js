@@ -105,7 +105,7 @@ const onMouseUp = () => {
 };
 
 const onTouchStart = (event) => {
-  event.preventDefault();
+  // event.preventDefault();
 
   lastX = event.touches[0].clientX;
   lastY = event.touches[0].clientY;
@@ -173,32 +173,106 @@ setup();
 const parentList = document.querySelector(".nav-list");
 const parentWrapper = document.querySelector(".nav-wrapper");
 let open = [];
+let dropdown;
 
-const closeNav = (e) => {
-  if (
-    e.target.classList.contains("nav-wrapper") ||
-    e.relatedTarget.tagName.toLowerCase() === "li"
-  ) {
-    open.forEach((el) => {
-      el.removeChild(el.querySelector(".nav-dropdown"));
-    });
-    open = [];
-    parentWrapper.removeEventListener("mouseout", closeNav);
+const removeNavModal = () => {
+  open.forEach((el) => {
+    el.removeChild(el.querySelector(".nav-dropdown"));
+  });
+  open = [];
+  dropdown = null;
+  parentWrapper.removeEventListener("mouseout", handleNavBar);
+};
+
+const isDescendant = (parent, child) => {
+  let node = child.parentNode;
+  while (node != null) {
+    if (node === parent) {
+      return true;
+    }
+    node = node.parentNode;
+  }
+  return false;
+};
+
+const handleNavBar = (e) => {
+  if (!e.relatedTarget.classList.contains("nav-dropdown")) {
+    if (
+      e.target.classList.contains("nav-wrapper") ||
+      e.relatedTarget.classList.contains("list-item")
+    ) {
+      if (e.relatedTarget.classList[1] !== dropdown.classList[1]) {
+        removeNavModal();
+      }
+    }
   }
 };
 
+const handleModalExit = (e) => {
+  if (!e.relatedTarget.classList.contains("nav-wrapper")) {
+    removeNavModal();
+  }
+};
+
+const createNavModal = () => {
+  const navModal = document.createElement("div");
+  navModal.classList.add("nav-dropdown", "page-nav");
+  navModal.setAttribute("id", "nav-modal");
+
+  const ul = document.createElement("ul");
+  const li = document.createElement("li");
+  const li2 = document.createElement("li");
+
+  li.innerHTML = "hello worlddddd";
+  li2.innerHTML = "hello worlddddd";
+
+  ul.appendChild(li);
+  ul.appendChild(li2);
+
+  navModal.appendChild(ul);
+
+  return navModal;
+};
+
+const createSocialModal = () => {
+  const socialModal = document.createElement("div");
+  socialModal.classList.add("nav-dropdown", "social-nav");
+  socialModal.setAttribute("id", "social-modal");
+
+  const ul = document.createElement("ul");
+  const li = document.createElement("li");
+  const li2 = document.createElement("li");
+
+  li.innerHTML = "social worldddd";
+  li2.innerHTML = "social worldddd";
+
+  ul.appendChild(li);
+  ul.appendChild(li2);
+
+  socialModal.appendChild(ul);
+
+  return socialModal;
+};
+
 parentWrapper.addEventListener("mouseover", (event) => {
-  targetEl = event.target.tagName.toLowerCase();
+  if (event.target.classList.contains("list-item")) {
+    if (event.target.innerHTML === "Test" && !dropdown) {
+      dropdown = createNavModal();
+      open.push(event.target);
+      event.target.appendChild(dropdown);
+      setTimeout(() => {
+        dropdown.style.opacity = 1;
+      }, 10);
+    } else if (event.target.innerHTML === "Test2" && !dropdown) {
+      dropdown = createSocialModal();
+      open.push(event.target);
+      event.target.appendChild(dropdown);
+      setTimeout(() => {
+        dropdown.style.opacity = 1;
+      }, 10);
+    }
 
-  const navList = document.createElement("div");
-
-  navList.classList.add("nav-dropdown");
-
-  navList.innerHTML = "Hello";
-
-  if (targetEl === "li") {
-    open.push(event.target);
-    event.target.appendChild(navList);
-    parentWrapper.addEventListener("mouseout", closeNav);
+    parentWrapper.addEventListener("mouseout", handleNavBar);
+    dropdown.addEventListener("mouseleave", handleModalExit);
   }
 });

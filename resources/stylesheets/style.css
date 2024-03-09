@@ -179,6 +179,7 @@ nav {
   overflow: visible;
 }
 
+/* ADJUST WIDTH RESPONSIVELY TO HANDLE MOUSEOUT ERROR */
 .nav-wrapper {
   margin-top: 0.75rem;
   display: flex;
@@ -202,12 +203,19 @@ nav {
   position: relative;
   cursor: pointer;
   overflow: visible;
+  display: flex;
+  justify-content: center;
 }
 
 .nav-dropdown {
+  cursor: auto;
   position: absolute;
-  background-color: red;
+  background-color: black;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.8rem;
   padding: 1rem;
-  left: calc(-55%);
-  margin-top: 0.5rem;
+  text-wrap: nowrap;
+  margin-top: 1.75rem;
+  transition-duration: 0.5s;
+  opacity: 0;
 }
