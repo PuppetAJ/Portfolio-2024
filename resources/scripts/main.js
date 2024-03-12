@@ -15,8 +15,6 @@ let time = 0,
 
 // Spacing options
 // 3, 4, 5, 6, 7, 8, 9
-
-// 0.9
 const MAX_OFFSET = 450;
 const SPACING = 4;
 const POINTS = Math.floor(MAX_OFFSET / SPACING);
@@ -173,44 +171,73 @@ setup();
 const parentList = document.querySelector(".nav-list");
 const parentWrapper = document.querySelector(".nav-wrapper");
 let open = [];
-let dropdown;
+let dropdown, lastModal, playTransition;
 
-const removeNavModal = () => {
+const getElementDimensions = (el, parent) => {
+  el.style.visibility = "hidden";
+  parent.appendChild(el);
+  const height = el.offsetHeight;
+  const width = el.offsetWidth;
+  parent.removeChild(el);
+  el.style.visibility = "visible";
+  return { height, width };
+};
+
+const testLastModal = (targetClass, relatedTargetClass) => {
+  if (relatedTargetClass === "page-nav" && targetClass === "social-nav") {
+    return true;
+  }
+
+  if (relatedTargetClass === "social-nav" && targetClass === "page-nav") {
+    return true;
+  }
+};
+
+const removeNavModal = (lastModalOpen) => {
   open.forEach((el) => {
     el.removeChild(el.querySelector(".nav-dropdown"));
   });
   open = [];
+  lastModalOpen ? (playTransition = true) : (playTransition = false);
+  lastModal = dropdown;
   dropdown = null;
   parentWrapper.removeEventListener("mouseout", handleNavBar);
 };
 
-const isDescendant = (parent, child) => {
-  let node = child.parentNode;
-  while (node != null) {
-    if (node === parent) {
-      return true;
-    }
-    node = node.parentNode;
-  }
-  return false;
-};
-
 const handleNavBar = (e) => {
-  if (!e.relatedTarget.classList.contains("nav-dropdown")) {
-    if (
-      e.target.classList.contains("nav-wrapper") ||
-      e.relatedTarget.classList.contains("list-item")
-    ) {
-      if (e.relatedTarget.classList[1] !== dropdown.classList[1]) {
-        removeNavModal();
+  if (e.relatedTarget) {
+    // if wrapper protects against page exit errors
+    if (!e.relatedTarget.classList.contains("nav-dropdown")) {
+      if (
+        e.target.classList.contains("nav-wrapper") ||
+        e.relatedTarget.classList.contains("list-item")
+      ) {
+        if (e.relatedTarget.classList[1] !== dropdown.classList[1]) {
+          const lastModalOpen = testLastModal(
+            e.relatedTarget.classList[1],
+            dropdown.classList[1]
+          );
+
+          removeNavModal(lastModalOpen);
+        }
       }
     }
+  } else {
+    removeNavModal(false);
   }
 };
 
 const handleModalExit = (e) => {
-  if (!e.relatedTarget.classList.contains("nav-wrapper")) {
-    removeNavModal();
+  if (e.relatedTarget) {
+    if (!e.relatedTarget.classList.contains("nav-wrapper")) {
+      const lastModalOpen = testLastModal(
+        e.relatedTarget.classList[1],
+        dropdown.classList[1]
+      );
+      removeNavModal(lastModalOpen);
+    }
+  } else {
+    removeNavModal(false);
   }
 };
 
@@ -222,12 +249,20 @@ const createNavModal = () => {
   const ul = document.createElement("ul");
   const li = document.createElement("li");
   const li2 = document.createElement("li");
+  const li3 = document.createElement("li");
 
-  li.innerHTML = "hello worlddddd";
+  ul.classList.add("nav-dropdown-ul");
+  li.classList.add("nav-dropdown-li");
+  li2.classList.add("nav-dropdown-li");
+  li3.classList.add("nav-dropdown-li");
+
+  li.innerHTML = "hello worldddd";
   li2.innerHTML = "hello worlddddd";
+  li3.innerHTML = "hello worlddddd";
 
   ul.appendChild(li);
   ul.appendChild(li2);
+  ul.appendChild(li3);
 
   navModal.appendChild(ul);
 
@@ -243,8 +278,12 @@ const createSocialModal = () => {
   const li = document.createElement("li");
   const li2 = document.createElement("li");
 
-  li.innerHTML = "social worldddd";
-  li2.innerHTML = "social worldddd";
+  ul.classList.add("nav-dropdown-ul");
+  li.classList.add("nav-dropdown-li");
+  li2.classList.add("nav-dropdown-li");
+
+  li.innerHTML = "social worldd";
+  li2.innerHTML = "social worldd";
 
   ul.appendChild(li);
   ul.appendChild(li2);
@@ -254,22 +293,48 @@ const createSocialModal = () => {
   return socialModal;
 };
 
+const appendModal = (modal, event) => {
+  let lastModalDims;
+  let dropdownDims;
+
+  modal === "nav"
+    ? (dropdown = createNavModal())
+    : (dropdown = createSocialModal());
+
+  if (lastModal && playTransition) {
+    lastModalDims = getElementDimensions(lastModal, event.target);
+    dropdownDims = getElementDimensions(dropdown, event.target);
+    dropdown.style.height = `${lastModalDims.height}px`;
+    dropdown.style.width = `${lastModalDims.width}px`;
+  }
+
+  open.push(event.target);
+  event.target.appendChild(dropdown);
+  dropdown.style.transform = "scale(0.9)";
+  if (lastModal && playTransition) {
+    modal === "nav"
+      ? (dropdown.style.transform = `translateX(+63%)`)
+      : (dropdown.style.transform = `translateX(-58%)`);
+
+    dropdown.style.opacity = 1;
+  }
+
+  setTimeout(() => {
+    dropdown.style.opacity = 1;
+    dropdown.style.transform = "translateX(0) scale(1)";
+    if (lastModal && playTransition) {
+      dropdown.style.height = `${dropdownDims.height}px`;
+      dropdown.style.width = `${dropdownDims.width}px`;
+    }
+  }, 10);
+};
+
 parentWrapper.addEventListener("mouseover", (event) => {
   if (event.target.classList.contains("list-item")) {
-    if (event.target.innerHTML === "Test" && !dropdown) {
-      dropdown = createNavModal();
-      open.push(event.target);
-      event.target.appendChild(dropdown);
-      setTimeout(() => {
-        dropdown.style.opacity = 1;
-      }, 10);
-    } else if (event.target.innerHTML === "Test2" && !dropdown) {
-      dropdown = createSocialModal();
-      open.push(event.target);
-      event.target.appendChild(dropdown);
-      setTimeout(() => {
-        dropdown.style.opacity = 1;
-      }, 10);
+    if (event.target.innerHTML === "Navigation" && !dropdown) {
+      appendModal("nav", event);
+    } else if (event.target.innerHTML === "Social" && !dropdown) {
+      appendModal("social", event);
     }
 
     parentWrapper.addEventListener("mouseout", handleNavBar);
