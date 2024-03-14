@@ -51,6 +51,14 @@ button {
 :root {
   font-size: 16px;
   color: white;
+  color-scheme: dark;
+}
+
+.fira-code-reg {
+  font-family: "Fira Code", monospace;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .mulish-reg {
@@ -66,7 +74,7 @@ button {
 }
 
 body {
-  background-color: rgb(5, 5, 5);
+  background-color: rgb(0, 0, 0);
 }
 
 /* Header Styles */
@@ -83,6 +91,7 @@ header {
     0 0 / 16px 16px;
 
   height: 100vh;
+  padding-bottom: 10rem;
   display: flex;
   flex-direction: column;
 }
@@ -167,19 +176,20 @@ header {
 #canvas {
   position: absolute;
   z-index: -1;
-  opacity: 0.7;
+  opacity: 0.6;
   overflow: hidden;
 }
 
 nav {
-  position: relative;
+  left: 25%;
+  right: 25%;
+  position: fixed;
   z-index: 300;
   display: flex;
   justify-content: center;
   overflow: visible;
 }
 
-/* ADJUST WIDTH RESPONSIVELY TO HANDLE MOUSEOUT ERROR */
 .nav-wrapper {
   margin-top: 0.75rem;
   display: flex;
@@ -215,7 +225,7 @@ nav {
   border-radius: 0.8rem;
   text-wrap: nowrap;
   margin-top: 2.3rem;
-  transition: all 0.23s ease-in-out;
+  transition: all 0.24s ease-in-out;
   /* transform-origin: top center; */
   opacity: 0;
   overflow: hidden;
@@ -231,4 +241,86 @@ nav {
 
 .nav-dropdown li:last-child {
   margin-bottom: 1rem;
+}
+
+.about-wrapper {
+  margin: 4rem;
+}
+
+/* About Section */
+
+.about {
+  height: 50rem;
+  /* margin: 10rem; */
+}
+
+.about h2 {
+  font-size: 3.6rem;
+  font-weight: 800;
+  margin: 1rem 0;
+  position: relative;
+  overflow: visible;
+  margin-bottom: 2.5rem;
+}
+
+.about h2::after {
+  content: "";
+  position: absolute;
+  background-color: #aa83ff;
+  width: 100%;
+  margin-left: 2rem;
+  padding: 1.5px;
+  bottom: 45%;
+  opacity: 0.5;
+}
+
+.number {
+  color: #aa83ff;
+  font-size: 3rem;
+}
+
+.about-content {
+  display: flex;
+  min-width: 1rem;
+  align-items: center;
+  /* justify-content: space-between; */
+  gap: 3.5rem;
+}
+
+.about-head {
+  max-width: 26rem;
+  display: flex;
+  flex-direction: column;
+  padding-right: 4rem;
+  border-right: 2px solid #aa83ff5d;
+}
+
+.about-paragraph {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 45rem;
+}
+
+.about-head h3 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+
+.about-head h4 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.55rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.about-head p {
+  font-size: 1.05rem;
+  margin-top: 0.5rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.about-paragraph p {
+  color: rgba(255, 255, 255, 0.8);
 }
