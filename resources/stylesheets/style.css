@@ -228,7 +228,6 @@ nav {
   text-wrap: nowrap;
   margin-top: 2.3rem;
   transition: all 0.24s ease-in-out;
-  /* transform-origin: top center; */
   opacity: 0;
   overflow: hidden;
 }
@@ -247,13 +246,17 @@ nav {
 
 /* Main General Styles */
 
+main {
+  margin-top: 3rem;
+}
+
 .main-heading {
   font-size: 3.6rem;
   font-weight: 800;
   margin: 1rem 0;
   position: relative;
   overflow: visible;
-  margin-bottom: 2.5rem;
+  margin-bottom: 4.5rem;
 }
 
 .main-heading::after {
@@ -268,14 +271,13 @@ nav {
 }
 
 .main-content {
-  margin-bottom: 2rem;
+  margin-bottom: 4.5rem;
 }
 
 /* About Section */
 
 .about {
   margin-bottom: 2rem;
-  /* margin: 10rem; */
 }
 
 .number {
@@ -287,7 +289,6 @@ nav {
   display: flex;
   min-width: 1rem;
   align-items: center;
-  /* justify-content: space-between; */
   gap: 3.5rem;
 }
 
@@ -332,25 +333,16 @@ nav {
 
 /* Skills Section */
 
-#skills-section {
-  height: 60rem;
-  overflow: visible;
-}
-
 .skills-wrapper {
-  /* height: 50rem; */
   display: flex;
   justify-content: space-between;
-  /* height: 50rem; */
   overflow: visible;
 }
 
 .skill {
   position: relative;
   background: linear-gradient(to bottom right, #ef8bff, rgb(52, 163, 228));
-  /* border: 4px solid transparent; */
-
-  padding: 3.5px;
+  padding: 2px;
   border-radius: 3.5rem;
   overflow: visible;
 }
@@ -360,25 +352,34 @@ nav {
   justify-content: center;
   align-items: center;
   background: black;
-  padding: 2.6rem;
+  padding: 2.5rem;
   max-width: 23rem;
   height: 22rem;
-  border-radius: 3.25rem;
+  border-radius: 3.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: visible;
 }
 
 .skill-head {
+  position: relative;
+  right: 0.4rem;
+  overflow: visible;
   display: flex;
   align-items: center;
   margin-bottom: 1.5rem;
+}
+
+#figma {
+  margin-right: 0.4rem;
 }
 
 .skill-heading {
   line-height: 1.25;
   font-size: 1.8rem;
   font-weight: 800;
+  text-wrap: nowrap;
 }
 
 .skill-icon {
@@ -390,6 +391,10 @@ nav {
 .skill-body {
   display: flex;
   flex-direction: column;
+  overflow: visible;
+  position: relative;
+  position: relative;
+  right: 0.25rem;
 }
 
 .skill-body p {
@@ -398,11 +403,12 @@ nav {
 
 .skill-body p:nth-child(2) {
   position: relative;
-  left: 1.05rem;
-  border-left: 2px solid rgba(102, 98, 141, 0.233);
+  left: 1.3rem;
+  border-left: 2px solid rgba(102, 98, 141, 0.39);
   padding-left: 1.5rem;
   padding-bottom: 0.5rem;
-  max-width: 17.6rem;
+  max-width: 20rem;
+  opacity: 0.8;
 }
 
 .tag {
@@ -420,7 +426,7 @@ nav {
 .shadow-effect {
   border-radius: 3.5rem;
   background: none;
-  box-shadow: 0rem 1rem 1rem 0rem #4d50ff3f;
+  box-shadow: 0.15rem 0.7rem 1rem 0rem #4d50ff3f;
   overflow: visible;
   margin-bottom: 3rem;
 }
