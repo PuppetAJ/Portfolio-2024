@@ -341,3 +341,187 @@ parentWrapper.addEventListener("mouseover", (event) => {
     dropdown.addEventListener("mouseleave", handleModalExit);
   }
 });
+
+const projectArr = [
+  {
+    languages: "HTML, CSS",
+    name: "Run Buddy basic website",
+    description:
+      "The first website I built during my program with UNCC. just a simple HTML/CSS site.",
+    imgName: "runbuddy",
+    alt: "Run Buddy website",
+    githubLink: "https://github.com/PuppetAJ/run-buddy",
+    deployedLink: "https://puppetaj.github.io/run-buddy/",
+  },
+  {
+    languages: "HTML, CSS, BULMA CSS, JS",
+    name: "RoadE",
+    description:
+      "An app that lets you filter for events near you area by location, genre, and more. Stores search history.",
+    imgName: "roade",
+    alt: "RoadE website banner",
+    githubLink: "https://github.com/areed98/RoadE",
+    deployedLink: "https://areed98.github.io/RoadE/",
+  },
+  {
+    languages: "JS, NODE, EXPRESS, MYSQL, BOOTSTRAP",
+    name: "Tech Blog Demo",
+    description:
+      "A demo tech blog app that allows you to login, create/edit posts, and add comments.",
+    imgName: "blog",
+    alt: "Tech blog demo website",
+    githubLink: "https://github.com/PuppetAJ/14-Blog-AJ",
+    deployedLink: "https://tech-blog-aj.herokuapp.com",
+  },
+  {
+    languages: "JS, WEBPACK, WORKBOX, IDB, EXPRESS",
+    name: "Just Another Text Editor",
+    description:
+      "A simple text editor PWA that can be installed on your machine and functions offline using service workers.",
+    imgName: "jate",
+    alt: "Just another text editor website",
+    githubLink: "https://github.com/PuppetAJ/19-TextEditor-AJ",
+    deployedLink: "https://frozen-journey-17981.herokuapp.com/",
+  },
+  {
+    languages: "JS, THREE.JS, MYSQL, HANDLEBARS",
+    name: "GrimRepo",
+    description:
+      "A 3D card game heavily based off of the game Inscryption. It features user authentication, highscore tracking, and many custom cards to use.",
+    imgName: "grimrepo",
+    alt: "The GrimRepo website",
+    githubLink: "https://github.com/PuppetAJ/GrimRepo",
+    deployedLink: "https://grimrepo-aj.herokuapp.com/",
+  },
+  {
+    languages: "JS, REACT THREE FIBER, MONGODB, REACT.JS",
+    name: "Chunk'd",
+    description:
+      "A 3D recreation of a minecraft chunk featuring procedurally generated terrian and a forum to post builds. It's also a PWA!",
+    imgName: "chunkd",
+    alt: "The Chunkd website",
+    githubLink: "https://github.com/PuppetAJ/ReactMC",
+    deployedLink: "https://chunkd-aj.herokuapp.com/",
+  },
+];
+
+const projectsContainer = document.querySelector(".projects-container");
+
+// Mouse enter func
+const mouseEnter = (e) => {
+  // Gets closest project and sets the image to 15% opacity
+  // sets the buttons to 100% opacity
+  const el = e.target.closest(".project-format");
+  const children = el.firstChild.children;
+  for (const child of children) {
+    if (child.className === "project-button-wrapper") {
+      child.style.opacity = "100%";
+      child.style.transition = "all 0.4s";
+    } else {
+      child.style.opacity = "12%";
+      child.style.transition = "all 0.4s";
+    }
+  }
+};
+
+// Mouse exit func
+const mouseLeave = (e) => {
+  // Gets closest project and sets the image to 100% opacity
+  // sets the buttons to 0% opacity
+  const el = e.target.closest(".project-format");
+  const children = el.firstChild.children;
+  for (const child of children) {
+    if (child.className === "project-button-wrapper") {
+      child.style.opacity = "0%";
+      child.style.transition = "all 0.4s";
+    } else {
+      child.style.opacity = "100%";
+      child.style.transition = "all 0.4s";
+    }
+  }
+};
+
+const createProject = (props) => {
+  const {
+    languages,
+    name,
+    description,
+    imgName,
+    githubLink,
+    deployedLink,
+    alt,
+  } = props;
+
+  const articleWrapper = document.createElement("article");
+  const imageWrapper = document.createElement("div");
+  const buttonWrapper = document.createElement("div");
+  const githubButton = document.createElement("a");
+  const deployedButton = document.createElement("a");
+  const projectImage = document.createElement("img");
+
+  const projectTextWrapper = document.createElement("div");
+  const projectLanguages = document.createElement("h3");
+  const projectName = document.createElement("h2");
+  const projectDescription = document.createElement("p");
+
+  const eyeIcon = document.createElement("span");
+  const githubIcon = document.createElement("span");
+
+  const githubButtonText = document.createElement("p");
+  const deployedButtonText = document.createElement("p");
+
+  articleWrapper.classList.add("project-format");
+  imageWrapper.classList.add("project-image");
+  buttonWrapper.classList.add("project-button-wrapper");
+  githubButton.classList.add("project-button");
+  deployedButton.classList.add("project-button");
+  projectImage.classList.add("project-img-format");
+  projectTextWrapper.classList.add("project-text");
+
+  eyeIcon.style.display = "flex";
+  githubIcon.style.display = "flex";
+
+  eyeIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="h-4 w-4"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
+  githubIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="h-4 w-4"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>`;
+
+  projectLanguages.innerHTML = languages;
+  projectName.innerHTML = name;
+  projectDescription.innerHTML = description;
+
+  githubButtonText.innerText = "GitHub";
+  deployedButtonText.innerText = "View Preview";
+
+  githubButton.appendChild(githubIcon);
+  githubButton.appendChild(githubButtonText);
+  githubButton.setAttribute("href", githubLink);
+  githubButton.setAttribute("target", "_blank");
+
+  deployedButton.appendChild(eyeIcon);
+  deployedButton.appendChild(deployedButtonText);
+  deployedButton.setAttribute("href", deployedLink);
+  deployedButton.setAttribute("target", "_blank");
+
+  projectImage.setAttribute("alt", alt);
+  projectImage.setAttribute("src", `./resources/images/${imgName}.webp`);
+
+  buttonWrapper.appendChild(githubButton);
+  buttonWrapper.appendChild(deployedButton);
+  imageWrapper.appendChild(buttonWrapper);
+  imageWrapper.appendChild(projectImage);
+
+  projectTextWrapper.appendChild(projectLanguages);
+  projectTextWrapper.appendChild(projectName);
+  projectTextWrapper.appendChild(projectDescription);
+
+  articleWrapper.appendChild(imageWrapper);
+  articleWrapper.appendChild(projectTextWrapper);
+
+  imageWrapper.addEventListener("mouseover", mouseEnter);
+  imageWrapper.addEventListener("mouseout", mouseLeave);
+
+  return articleWrapper;
+};
+
+projectArr.forEach((el) => {
+  projectsContainer.appendChild(createProject(el));
+});

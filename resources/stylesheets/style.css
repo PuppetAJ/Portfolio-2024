@@ -93,7 +93,7 @@ header {
     0 0 / 16px 16px;
 
   height: 100vh;
-  padding-bottom: 10vh;
+  padding-bottom: 8vh;
   display: flex;
   flex-direction: column;
 }
@@ -247,7 +247,7 @@ nav {
 /* Main General Styles */
 
 main {
-  margin-top: 3rem;
+  margin-top: 5rem;
 }
 
 .main-heading {
@@ -256,7 +256,7 @@ main {
   margin: 1rem 0;
   position: relative;
   overflow: visible;
-  margin-bottom: 4.5rem;
+  margin-bottom: 5.5rem;
 }
 
 .main-heading::after {
@@ -429,4 +429,92 @@ main {
   box-shadow: 0.15rem 0.7rem 1rem 0rem #4d50ff3f;
   overflow: visible;
   margin-bottom: 3rem;
+}
+
+/* Projects Section */
+
+.project-format {
+  grid-column: span 1;
+  max-width: 37.5rem;
+  margin: 1.25rem;
+  border: 0.125rem solid rgb(229, 231, 235, 0.25);
+  border-radius: 1%;
+}
+
+.project-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.project-img-format {
+  object-fit: cover;
+  z-index: 0;
+  width: 100%;
+  height: 15.625rem;
+}
+
+.transition-opacity {
+  opacity: 15%;
+  transition: all 0.3s;
+}
+
+.project-text {
+  padding: 1.5rem;
+}
+
+.project-text h3 {
+  color: #aa83ff;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+  font-size: 1.2rem;
+}
+
+.project-text h2 {
+  margin-top: 1px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.project-text p {
+  margin-top: 1rem;
+  font-size: 1.256rem;
+  color: #afb4dfa8;
+}
+
+.project-button {
+  cursor: pointer;
+  display: flex;
+  gap: 0.3rem;
+  margin: 0.8rem;
+  border: 0.2rem solid #aa83ff;
+  border-radius: 0.625rem;
+  padding: 0.3rem 0.625rem;
+  font-weight: bold;
+  color: #aa83ff;
+}
+
+.project-button-icon {
+  color: #aa83ff !important;
+}
+
+.project-button:hover {
+  color: white;
+  transition: all 0.3s;
+  background-color: #aa83ff;
+}
+
+.project-button-wrapper {
+  z-index: 10;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+}
+
+.projects-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }
