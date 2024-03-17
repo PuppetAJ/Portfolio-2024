@@ -87,13 +87,13 @@ header {
 
   background: radial-gradient(
       circle at var(--d) var(--d),
-      rgba(255, 255, 255, 0.4) calc(var(--d) - 1px),
+      rgba(255, 255, 255, 0.43) calc(var(--d) - 1px),
       #1f1f1f00 var(--d)
     )
     0 0 / 16px 16px;
 
   height: 100vh;
-  padding-bottom: 8vh;
+  padding-bottom: 5vh;
   display: flex;
   flex-direction: column;
 }
@@ -517,4 +517,80 @@ main {
 .projects-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+}
+
+/* Contact Section */
+
+.contact-form {
+  background-color: #09090a;
+  border: 0.125rem solid #e5e7eb40;
+  border-radius: 1.5%;
+  padding: 2.5rem;
+  padding-bottom: 0rem;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form textarea {
+  min-height: 7.1825rem;
+  min-width: 99%;
+  max-width: 99%;
+}
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+}
+
+.form-control label {
+  font-size: 1.15rem;
+  margin-bottom: 0.5rem;
+  /* color: #aa83ff; */
+}
+
+.form-input {
+  width: auto;
+  font-size: 1rem;
+  padding: 0.5rem 0.65rem;
+  border-radius: 0.25rem;
+  border: 1px solid rgb(66, 68, 73);
+  background-color: #121214;
+  margin: 0.25rem;
+  transition: all 0.3s;
+  outline-offset: 0.5px;
+}
+
+.form-button {
+  margin: 1rem auto;
+  margin-bottom: 1.75rem;
+  width: 33%;
+  background-color: transparent;
+  border-radius: 0.5rem;
+  border: 2px solid #aa83ff;
+  color: #aa83ff;
+  padding: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.form-button:hover {
+  background-color: #aa83ff;
+  color: white;
+}
+
+.requirement {
+  color: #ff4949;
+}
+
+/* Footer Section */
+
+footer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+  font-size: 1.1rem;
 }

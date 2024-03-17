@@ -525,3 +525,50 @@ const createProject = (props) => {
 projectArr.forEach((el) => {
   projectsContainer.appendChild(createProject(el));
 });
+
+const formInputs = document.querySelectorAll(".form-input");
+const submitButton = document.querySelector(".form-button");
+
+const validateEmail = (email) => {
+  const re = /\S+@\S+\.\S+/;
+  return re.test(email);
+};
+
+const validateInputs = () => {
+  formInputs.forEach((el) => {
+    validateInput(el);
+  });
+};
+
+const validateInput = (el) => {
+  if (el.value === "") {
+    el.style.outline = "1px solid red";
+  } else {
+    el.style.outline = "transparent";
+  }
+
+  if (el.id === "email") {
+    if (!validateEmail(el.value)) {
+      el.style.outline = "1px solid red";
+    } else {
+      el.style.outline = "transparent";
+    }
+  }
+};
+
+formInputs.forEach((el) => {
+  el.addEventListener("focus", (e) => {
+    console.log(e.target);
+    el.style.outline = "1px solid #9e88cc";
+  });
+
+  el.addEventListener("blur", (e) => {
+    // el.style.outline = "transparent";
+    validateInput(e.target);
+  });
+});
+
+submitButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  validateInputs();
+});
