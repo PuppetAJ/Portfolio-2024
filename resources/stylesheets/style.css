@@ -70,6 +70,10 @@ button {
   color-scheme: dark;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -198,7 +202,7 @@ nav {
   justify-content: center;
   align-items: center;
   background-color: black;
-  min-height: 4rem;
+  min-height: 4.5rem;
   border-radius: 4rem;
   width: 35rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -209,6 +213,7 @@ nav {
   display: flex;
   gap: 1.5rem;
   overflow: visible;
+  font-size: 1.1rem;
 }
 
 .list-item {
@@ -227,9 +232,10 @@ nav {
   border-radius: 0.8rem;
   text-wrap: nowrap;
   margin-top: 2.3rem;
-  transition: all 0.24s ease-in-out;
+  transition: all 0.23s ease-in-out;
   opacity: 0;
   overflow: hidden;
+  font-size: 1rem;
 }
 
 .nav-dropdown-ul {
@@ -247,16 +253,17 @@ nav {
 /* Main General Styles */
 
 main {
-  margin-top: 5rem;
+  /* margin-top: 5rem; */
 }
 
 .main-heading {
+  padding-top: 4rem;
   font-size: 3.6rem;
   font-weight: 800;
   margin: 1rem 0;
   position: relative;
   overflow: visible;
-  margin-bottom: 5.5rem;
+  margin-bottom: 4.5rem;
 }
 
 .main-heading::after {
@@ -266,7 +273,7 @@ main {
   width: 100%;
   margin-left: 2rem;
   padding: 1.5px;
-  bottom: 45%;
+  bottom: 25%;
   opacity: 0.5;
 }
 
@@ -351,7 +358,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: black;
+  background: rgb(8, 8, 8);
   padding: 2.5rem;
   max-width: 23rem;
   height: 22rem;
@@ -591,6 +598,65 @@ main {
 footer {
   display: flex;
   justify-content: center;
-  margin-bottom: 2.5rem;
+  margin-top: 2.5rem;
+  margin-bottom: 3rem;
   font-size: 1.1rem;
+}
+
+/* Sidebar Styles */
+
+.email-sidebar {
+  transform: rotate(90deg);
+  overflow: visible;
+  position: fixed;
+  right: 1rem;
+  bottom: 19rem;
+  z-index: 3000;
+  font-size: 1.2rem;
+  color: #949597;
+  letter-spacing: 0.1rem;
+}
+
+.email-sidebar::after {
+  content: "";
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  top: 50%;
+  margin-left: 2rem;
+  background-color: #503e79;
+}
+
+.social-sidebar {
+  position: fixed;
+  left: 5.5rem;
+  bottom: 12rem;
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow: visible;
+}
+
+.social-sidebar::after {
+  content: "";
+  position: absolute;
+  height: 15rem;
+  width: 3px;
+  left: 50%;
+  margin-top: 17.6rem;
+  background-color: #503e79;
+}
+
+.social-sidebar svg {
+  width: 2.4rem;
+  height: 2.4rem;
+  color: #949597;
+}
+
+.sidebars {
+  opacity: 0;
+  /* transform: scale(95%); */
+  /* transform: translateY(-1%); */
+  transition: all 0.3s ease-in-out;
 }

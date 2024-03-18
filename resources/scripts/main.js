@@ -4,9 +4,10 @@
 const canvas = document.querySelector("canvas");
 const context = canvas.getContext("2d");
 
+// Future idea: add friction to the velocity to make it feel more natural
 let time = 0,
   velocity = 0.1,
-  velocityTarget = 0.01,
+  velocityTarget = 0.015,
   width,
   height,
   lastX,
@@ -150,7 +151,6 @@ const clear = () => {
 const step = () => {
   time += velocity;
   velocity += (velocityTarget - velocity) * 0.3;
-
   clear();
   render();
 
@@ -204,6 +204,15 @@ const removeNavModal = (lastModalOpen) => {
   parentWrapper.removeEventListener("mouseout", handleNavBar);
 };
 
+const isChild = (parent, child) => {
+  for (let i = 0; i < parent.children.length; i++) {
+    if (parent.children[i] === child) {
+      return true;
+    }
+  }
+  return false;
+};
+
 const handleNavBar = (e) => {
   if (e.relatedTarget) {
     // if wrapper protects against page exit errors
@@ -212,12 +221,14 @@ const handleNavBar = (e) => {
         e.target.classList.contains("nav-wrapper") ||
         e.relatedTarget.classList.contains("list-item")
       ) {
-        if (e.relatedTarget.classList[1] !== dropdown.classList[1]) {
+        if (
+          e.relatedTarget.classList[1] !== dropdown.classList[1] &&
+          !isChild(dropdown, e.relatedTarget)
+        ) {
           const lastModalOpen = testLastModal(
             e.relatedTarget.classList[1],
             dropdown.classList[1]
           );
-
           removeNavModal(lastModalOpen);
         }
       }
@@ -246,23 +257,27 @@ const createNavModal = () => {
   navModal.classList.add("nav-dropdown", "page-nav");
   navModal.setAttribute("id", "nav-modal");
 
+  const navItems = [
+    { name: "Landing Page", href: "landing" },
+    { name: "About Me", href: "about" },
+    { name: "Skills", href: "skills" },
+    { name: "My Projects", href: "projects" },
+    { name: "Contact Me", href: "contact" },
+  ];
+
   const ul = document.createElement("ul");
-  const li = document.createElement("li");
-  const li2 = document.createElement("li");
-  const li3 = document.createElement("li");
+
+  navItems.forEach((el) => {
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.innerHTML = el.name;
+    a.setAttribute("href", `#${el.href}`);
+    li.classList.add("nav-dropdown-li");
+    li.appendChild(a);
+    ul.appendChild(li);
+  });
 
   ul.classList.add("nav-dropdown-ul");
-  li.classList.add("nav-dropdown-li");
-  li2.classList.add("nav-dropdown-li");
-  li3.classList.add("nav-dropdown-li");
-
-  li.innerHTML = "hello worldddd";
-  li2.innerHTML = "hello worlddddd";
-  li3.innerHTML = "hello worlddddd";
-
-  ul.appendChild(li);
-  ul.appendChild(li2);
-  ul.appendChild(li3);
 
   navModal.appendChild(ul);
 
@@ -274,19 +289,52 @@ const createSocialModal = () => {
   socialModal.classList.add("nav-dropdown", "social-nav");
   socialModal.setAttribute("id", "social-modal");
 
+  socialItems = [
+    {
+      name: "LinkedIn",
+      href: "https://www.linkedin.com/in/andrew-jones-0a1b3b1b0/",
+      image: "./resources/icons/linkedin-logo.svg",
+    },
+    {
+      name: "GitHub",
+      href: "http://github.com",
+      image: "./resources/icons/github-logo.svg",
+    },
+    {
+      name: "Instagram",
+      href: "http://instagram.com",
+      image: "./resources/icons/instagram-logo.svg",
+    },
+    {
+      name: "Twitter",
+      href: "http://twitter.com",
+      image: "./resources/icons/twitter-logo.svg",
+    },
+  ];
+
   const ul = document.createElement("ul");
-  const li = document.createElement("li");
-  const li2 = document.createElement("li");
-
   ul.classList.add("nav-dropdown-ul");
-  li.classList.add("nav-dropdown-li");
-  li2.classList.add("nav-dropdown-li");
 
-  li.innerHTML = "social worldd";
-  li2.innerHTML = "social worldd";
+  socialItems.forEach((el) => {
+    const a = document.createElement("a");
+    const img = document.createElement("img");
+    const li = document.createElement("li");
+    const p = document.createElement("p");
 
-  ul.appendChild(li);
-  ul.appendChild(li2);
+    li.classList.add("nav-dropdown-li");
+
+    img.setAttribute("src", el.image);
+    img.setAttribute("alt", el.name);
+    img.style.marginRight = "0.5rem";
+    a.setAttribute("href", el.href);
+    a.style.display = "flex";
+    p.innerText = el.name;
+
+    a.appendChild(img);
+    a.appendChild(p);
+    li.appendChild(a);
+    ul.appendChild(li);
+  });
 
   socialModal.appendChild(ul);
 
@@ -313,7 +361,7 @@ const appendModal = (modal, event) => {
   dropdown.style.transform = "scale(0.9)";
   if (lastModal && playTransition) {
     modal === "nav"
-      ? (dropdown.style.transform = `translateX(+63%)`)
+      ? (dropdown.style.transform = `translateX(+67%)`)
       : (dropdown.style.transform = `translateX(-58%)`);
 
     dropdown.style.opacity = 1;
@@ -571,4 +619,38 @@ formInputs.forEach((el) => {
 submitButton.addEventListener("click", (e) => {
   e.preventDefault();
   validateInputs();
+});
+
+const sidebars = document.querySelector(".sidebars");
+
+let observer = new IntersectionObserver(
+  (entries, observer) => {
+    console.log(entries);
+    entries.forEach((entry) => {
+      if (entry.target.classList.contains("content-body")) {
+        if (entry.isIntersecting) {
+          sidebars.style.opacity = 1;
+          // sidebars.style.transform = "scale(1)";
+        } else {
+          sidebars.style.opacity = 0;
+          // sidebars.style.transform = "translateY(-100%)";
+        }
+      }
+    });
+  },
+  {
+    threshold: 0.15,
+  }
+);
+
+console.log(observer);
+
+// document.querySelectorAll(".test").forEach((el) => {
+//   observer.observe(el);
+// });
+
+console.log("test");
+document.querySelectorAll(".content-body").forEach((el) => {
+  console.log(el);
+  observer.observe(el);
 });
