@@ -352,6 +352,13 @@ main {
   padding: 2px;
   border-radius: 3.5rem;
   overflow: visible;
+  transition: all 0.3s;
+  box-shadow: 0.15rem 0.7rem 1rem 0rem #4d50ff3f;
+}
+
+.skill:hover {
+  transform: translateY(-0.75rem);
+  box-shadow: 0rem 0.5rem 1.5rem 0rem #6c7bff8f;
 }
 
 .skill-container {
@@ -367,6 +374,7 @@ main {
   flex-direction: column;
   align-items: center;
   overflow: visible;
+  transition: all 0.3s;
 }
 
 .skill-head {
@@ -433,7 +441,6 @@ main {
 .shadow-effect {
   border-radius: 3.5rem;
   background: none;
-  box-shadow: 0.15rem 0.7rem 1rem 0rem #4d50ff3f;
   overflow: visible;
   margin-bottom: 3rem;
 }
@@ -555,7 +562,6 @@ main {
 .form-control label {
   font-size: 1.15rem;
   margin-bottom: 0.5rem;
-  /* color: #aa83ff; */
 }
 
 .form-input {
@@ -659,4 +665,11 @@ footer {
   /* transform: scale(95%); */
   /* transform: translateY(-1%); */
   transition: all 0.3s ease-in-out;
+}
+
+.fade-in,
+.fade-in-proj {
+  opacity: 0;
+  transform: translateY(5%);
+  transition: all 0.4s ease-in-out;
 }

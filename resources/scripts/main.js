@@ -327,6 +327,7 @@ const createSocialModal = () => {
     img.setAttribute("alt", el.name);
     img.style.marginRight = "0.5rem";
     a.setAttribute("href", el.href);
+    a.setAttribute("target", "_blank");
     a.style.display = "flex";
     p.innerText = el.name;
 
@@ -625,15 +626,12 @@ const sidebars = document.querySelector(".sidebars");
 
 let observer = new IntersectionObserver(
   (entries, observer) => {
-    console.log(entries);
     entries.forEach((entry) => {
       if (entry.target.classList.contains("content-body")) {
         if (entry.isIntersecting) {
           sidebars.style.opacity = 1;
-          // sidebars.style.transform = "scale(1)";
         } else {
           sidebars.style.opacity = 0;
-          // sidebars.style.transform = "translateY(-100%)";
         }
       }
     });
@@ -643,14 +641,44 @@ let observer = new IntersectionObserver(
   }
 );
 
-console.log(observer);
+let observer2 = new IntersectionObserver(
+  (entries, observer) => {
+    entries.filter((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = 1;
+        entry.target.style.transform = "translateY(0)";
+        observer.unobserve(entry.target);
+      }
+    });
+  },
+  {
+    threshold: 0.6,
+  }
+);
 
-// document.querySelectorAll(".test").forEach((el) => {
-//   observer.observe(el);
-// });
+let observer3 = new IntersectionObserver(
+  (entries, observer) => {
+    entries.filter((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = 1;
+        entry.target.style.transform = "translateY(0)";
+        observer.unobserve(entry.target);
+      }
+    });
+  },
+  {
+    threshold: 0.3,
+  }
+);
 
-console.log("test");
 document.querySelectorAll(".content-body").forEach((el) => {
-  console.log(el);
   observer.observe(el);
+});
+
+document.querySelectorAll(".fade-in").forEach((el) => {
+  observer2.observe(el);
+});
+
+document.querySelectorAll(".fade-in-proj").forEach((el) => {
+  observer3.observe(el);
 });
