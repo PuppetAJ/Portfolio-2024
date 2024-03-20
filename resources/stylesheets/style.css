@@ -128,7 +128,7 @@ header {
   opacity: 0.9;
 }
 
-.hero button {
+.resume-btn {
   background-color: white;
   color: rgb(0, 0, 0);
   width: 7.5rem;
@@ -136,15 +136,17 @@ header {
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
   font-weight: 700;
-}
-
-.hero button:first-child {
   margin-right: 1rem;
 }
 
-.hero button:last-child {
+.contact-btn {
   background-color: rgb(31, 34, 54);
   color: white;
+  width: 7.5rem;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-weight: 700;
 }
 
 .hero span {
