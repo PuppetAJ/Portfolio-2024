@@ -75,7 +75,7 @@ html {
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
 }
 
@@ -149,7 +149,7 @@ header {
   font-weight: 700;
 }
 
-.hero span {
+.hero span:first-child {
   position: relative;
   width: fit-content;
   margin: 0;
@@ -159,6 +159,32 @@ header {
   background-clip: text;
   z-index: 20;
   text-shadow: none;
+}
+
+.typing {
+  display: flex;
+  align-items: center;
+}
+
+.rounded {
+  margin-top: 0.5rem;
+  height: 4rem;
+  margin-left: 0.5rem;
+  border-right: 4px solid rgb(248, 108, 253);
+  border-radius: 1rem;
+  animation: cursor 1.3s infinite;
+}
+
+@keyframes cursor {
+  0% {
+    border-right: 4px solid rgb(248, 108, 253);
+  }
+  50% {
+    border-right: 4px solid transparent;
+  }
+  100% {
+    border-right: 4px solid rgb(248, 108, 253);
+  }
 }
 
 .focus {
@@ -238,10 +264,14 @@ nav {
   opacity: 0;
   overflow: hidden;
   font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .nav-dropdown-ul {
   margin: 0rem 1rem;
+  overflow: hidden;
 }
 
 .nav-dropdown li {
@@ -253,10 +283,6 @@ nav {
 }
 
 /* Main General Styles */
-
-main {
-  /* margin-top: 5rem; */
-}
 
 .main-heading {
   padding-top: 4rem;
@@ -298,6 +324,7 @@ main {
   display: flex;
   min-width: 1rem;
   align-items: center;
+  justify-content: center;
   gap: 3.5rem;
 }
 
@@ -543,7 +570,7 @@ main {
   border-radius: 1.5%;
   padding: 2.5rem;
   padding-bottom: 0rem;
-  max-width: 800px;
+  max-width: 50rem;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -617,7 +644,7 @@ footer {
   transform: rotate(90deg);
   overflow: visible;
   position: fixed;
-  right: 1rem;
+  right: 3rem;
   bottom: 19rem;
   z-index: 3000;
   font-size: 1.2rem;
@@ -637,7 +664,7 @@ footer {
 
 .social-sidebar {
   position: fixed;
-  left: 5.5rem;
+  left: 8.5rem;
   bottom: 12rem;
   z-index: 300;
   display: flex;
@@ -664,8 +691,6 @@ footer {
 
 .sidebars {
   opacity: 0;
-  /* transform: scale(95%); */
-  /* transform: translateY(-1%); */
   transition: all 0.3s ease-in-out;
 }
 
@@ -674,4 +699,361 @@ footer {
   opacity: 0;
   transform: translateY(5%);
   transition: all 0.4s ease-in-out;
+}
+
+/* Media Queries */
+
+@media screen and (max-width: 1920px) {
+  :root {
+    font-size: 14px;
+  }
+
+  .container {
+    max-width: 1000px;
+  }
+}
+
+@media screen and (max-width: 1520px) {
+  :root {
+    font-size: 12px;
+  }
+
+  .container {
+    max-width: 900px;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .sidebars {
+    display: none;
+  }
+
+  :root {
+    font-size: 13px;
+  }
+
+  .container {
+    max-width: 1000px;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  :root {
+    font-size: 12px;
+  }
+
+  .container {
+    max-width: 900px;
+  }
+
+  .resume-btn,
+  .contact-btn {
+    font-size: 1.25rem;
+    width: 9rem;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  :root {
+    font-size: 12px;
+  }
+
+  .container {
+    max-width: 700px;
+  }
+
+  .about-content {
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: baseline;
+  }
+
+  .about-head {
+    max-width: 100rem;
+    display: flex;
+    flex-direction: column;
+    border-right: none;
+    padding-right: 0;
+    padding-bottom: 3.5rem;
+    border-bottom: 2px solid #aa83ff5d;
+  }
+
+  .about-paragraph {
+    max-width: 100rem;
+  }
+
+  .about-head h3 {
+    font-size: 3.5rem;
+  }
+
+  .about-head h4 {
+    font-size: 2rem;
+  }
+
+  .about-head p {
+    font-size: 1.4rem;
+  }
+
+  .about-paragraph p {
+    font-size: 1.4rem;
+  }
+
+  .skills-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .skill {
+    padding: 3px;
+    border-radius: 3.7rem;
+  }
+
+  .skill-container {
+    padding: 1.5rem;
+    max-width: 50rem;
+    width: 60vw;
+    height: 32rem;
+    overflow: visible;
+    transition: all 0.3s;
+  }
+
+  .skill-heading {
+    font-size: 3rem;
+  }
+
+  .skill-icon {
+    width: 7rem;
+    height: 7rem;
+    margin-right: 2rem;
+  }
+  .skill-body p {
+    font-size: 1.5rem;
+  }
+
+  .skill-body p:nth-child(2) {
+    left: 1.7rem;
+  }
+
+  .project-format {
+    grid-column: span 2;
+    max-width: 100rem;
+  }
+
+  .project-img-format {
+    width: 100%;
+    height: 23rem;
+  }
+
+  .project-text h3 {
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .project-text h2 {
+    margin-top: 0.5rem;
+    font-size: 1.75rem;
+  }
+
+  .project-text p {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .form-control label {
+    font-size: 1.5rem;
+  }
+
+  .form-input {
+    font-size: 1.35rem;
+  }
+
+  .form-button {
+    font-size: 1.5rem;
+  }
+
+  /* Disables intersection observer animations for now */
+  .fade-in,
+  .fade-in-proj {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  footer {
+    font-size: 1.35rem;
+  }
+
+  .nav-list {
+    font-size: 1.3rem;
+  }
+
+  .nav-dropdown {
+    font-size: 1.2rem;
+  }
+
+  .nav-wrapper {
+    min-height: 5.2rem;
+    width: 40rem;
+  }
+
+  @media screen and (max-width: 750px) {
+    .hero h1 {
+      text-wrap: nowrap;
+    }
+
+    .container {
+      max-width: 600px;
+    }
+  }
+
+  @media screen and (max-width: 700px) {
+    :root {
+      font-size: 11.5px;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+    }
+
+    .container {
+      max-width: 550px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    :root {
+      font-size: 11px;
+    }
+
+    .hero h1 {
+      font-size: 3.3rem;
+    }
+
+    .container {
+      max-width: 500px;
+    }
+
+    .skill-container {
+      width: auto;
+    }
+  }
+
+  @media screen and (max-width: 530px) {
+    .rounded {
+      height: 3rem;
+      margin-left: 0.25rem;
+    }
+
+    :root {
+      font-size: 10.5px;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+    }
+
+    .container {
+      max-width: 400px;
+    }
+
+    .skill-container {
+      width: 35rem;
+    }
+
+    .project-img-format {
+      height: 20rem;
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    :root {
+      font-size: 10px;
+    }
+
+    .container {
+      max-width: 375px;
+    }
+
+    .skill-container {
+      width: 32rem;
+    }
+
+    nav {
+      left: 5%;
+      right: 5%;
+    }
+  }
+
+  @media screen and (max-width: 380px) {
+    :root {
+      font-size: 9px;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+
+    .container {
+      max-width: 310px;
+    }
+
+    .skill-container {
+      width: 30.5rem;
+    }
+
+    .main-heading {
+      font-size: 3rem;
+    }
+  }
+
+  @media screen and (max-width: 351px) {
+    .rounded {
+      display: none;
+    }
+
+    :root {
+      font-size: 9px;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+
+    .hero h4 {
+      font-size: 1.2rem;
+    }
+
+    .container {
+      max-width: 280px;
+    }
+
+    .skill-container {
+      width: 30.25rem;
+    }
+  }
+
+  @media screen and (max-width: 305px) {
+    :root {
+      font-size: 8.5px;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+
+    .hero h4 {
+      font-size: 1.2rem;
+    }
+
+    .container {
+      max-width: 260px;
+    }
+
+    .skill-container {
+      width: 29rem;
+    }
+
+    .skill-heading {
+      font-size: 2.5rem;
+    }
+  }
 }

@@ -373,7 +373,7 @@ const appendModal = (modal, event) => {
     dropdown.style.transform = "translateX(0) scale(1)";
     if (lastModal && playTransition) {
       dropdown.style.height = `${dropdownDims.height}px`;
-      dropdown.style.width = `${dropdownDims.width}px`;
+      dropdown.style.width = `${dropdownDims.width + 5}px`;
     }
   }, 10);
 };
@@ -682,3 +682,6 @@ document.querySelectorAll(".fade-in").forEach((el) => {
 document.querySelectorAll(".fade-in-proj").forEach((el) => {
   observer3.observe(el);
 });
+
+// resize logic for skills section
+// Future: Add typing icon on main header
