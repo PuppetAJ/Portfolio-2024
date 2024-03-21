@@ -172,6 +172,7 @@ const parentList = document.querySelector(".nav-list");
 const parentWrapper = document.querySelector(".nav-wrapper");
 let open = [];
 let openEffects = [];
+// let openDropdown = [];
 let dropdown, lastModal, playTransition;
 
 const getElementDimensions = (el, parent) => {
@@ -392,6 +393,18 @@ parentWrapper.addEventListener("mouseover", (event) => {
   }
 });
 
+const nav = document.querySelector(".nav-wrapper");
+const navTouchExit = (e) => {
+  if (
+    !e.target.classList.contains("nav-wrapper") &&
+    open.length &&
+    !isChild(nav, e.target)
+  ) {
+    removeNavModal(false);
+  }
+};
+document.addEventListener("touchstart", navTouchExit);
+
 const projectArr = [
   {
     languages: "HTML, CSS",
@@ -466,7 +479,9 @@ const mouseEnter = (e) => {
   for (const child of children) {
     if (child.className === "project-button-wrapper") {
       child.style.opacity = "100%";
+      child.style.visibility = "visible";
       child.style.transition = "all 0.4s";
+      // child.style.display = "flex";
       openEffects.push(child);
     } else {
       child.style.opacity = "12%";
@@ -496,6 +511,7 @@ const mouseLeave = (e) => {
   openEffects.forEach((el) => {
     if (el.className === "project-button-wrapper") {
       el.style.opacity = "0%";
+      el.style.visibility = "hidden";
       el.style.transition = "all 0.4s";
     } else {
       el.style.opacity = "100%";
@@ -507,10 +523,13 @@ const mouseLeave = (e) => {
 const touchLeave = (e) => {
   // Gets closest project and sets the image to 100% opacity
   // sets the buttons to 0% opacity
-  if (openEffects.length) {
+  let closest = e.target.closest(".project-format");
+  if (openEffects.length && closest && !closest.contains(e.target)) {
+    console.log("fired");
     openEffects.forEach((el) => {
       if (el.className === "project-button-wrapper") {
         el.style.opacity = "0%";
+        el.style.visibility = "hidden";
         el.style.transition = "all 0.4s";
       } else {
         el.style.opacity = "100%";
