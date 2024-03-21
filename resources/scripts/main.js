@@ -180,7 +180,7 @@ const getElementDimensions = (el, parent) => {
   const width = el.offsetWidth;
   parent.removeChild(el);
   el.style.visibility = "visible";
-  return { height, width };
+  return { height: height, width: width };
 };
 
 const testLastModal = (targetClass, relatedTargetClass) => {
@@ -373,7 +373,7 @@ const appendModal = (modal, event) => {
     dropdown.style.transform = "translateX(0) scale(1)";
     if (lastModal && playTransition) {
       dropdown.style.height = `${dropdownDims.height}px`;
-      dropdown.style.width = `${dropdownDims.width + 5}px`;
+      dropdown.style.width = `${dropdownDims.width}px`;
     }
   }, 10);
 };
