@@ -30,7 +30,7 @@ In order to install this project, download all files and simply open index.html!
 
 ## Usage
 
-![](./assets/images/preview.png)
+![](./resources/images/preview.png)
 
 In order to use this project, please make sure you download all files into a directory. Once that is set up, open index.html. Alternatively, visit the site [here](https://puppetaj.github.io/Portfolio-2024/)
 

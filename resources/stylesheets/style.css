@@ -194,9 +194,10 @@ header {
   z-index: 3;
   height: 100%;
   width: 100vw;
-  -webkit-mask-image: radial-gradient(ellipse at center, transparent 25%, #000);
-  mask-image: radial-gradient(ellipse at center, transparent 25%, #000);
+  -webkit-mask: radial-gradient(ellipse at center, transparent 25%, #000);
+  mask: radial-gradient(ellipse at center, transparent 25%, #000);
   backdrop-filter: brightness(0.15);
+  -webkit-backdrop-filter: brightness(0.15);
 }
 
 .hero-content {
