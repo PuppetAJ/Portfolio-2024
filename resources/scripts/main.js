@@ -100,14 +100,14 @@ const onMouseMove = (event) => {
 };
 
 const onMouseUp = (e) => {
-  e.preventDefault();
+  // e.preventDefault();
   document.removeEventListener("mousemove", onMouseMove);
   document.removeEventListener("mouseup", onMouseUp);
 };
 
 const onTouchStart = (event) => {
   // event.stopPropagation();
-  event.preventDefault();
+  // event.preventDefault();
 
   lastX = event.touches[0].clientX;
   lastY = event.touches[0].clientY;
@@ -211,8 +211,8 @@ const removeNavModal = (lastModalOpen) => {
 
 const handleNavBar = (e) => {
   if (e.relatedTarget) {
-    e.stopPropagation();
-    e.preventDefault();
+    // e.stopPropagation();
+    // e.preventDefault();
     // if wrapper protects against page exit errors
     if (!e.relatedTarget.classList.contains("nav-dropdown")) {
       if (
@@ -470,8 +470,8 @@ const projectsContainer = document.querySelector(".projects-container");
 const mouseEnter = (e) => {
   // Gets closest project and sets the image to 15% opacity
   // sets the buttons to 100% opacity
-  e.stopPropagation();
-  e.preventDefault();
+  // e.stopPropagation();
+  // e.preventDefault();
   const el = e.target.closest(".project-format");
   const children = el.firstChild.children;
   for (const child of children) {
@@ -506,8 +506,8 @@ const mouseLeave = (e) => {
   // }
 
   // Replacement logic using memory
-  e.stopPropagation();
-  e.preventDefault();
+  // e.stopPropagation();
+  // e.preventDefault();
   openEffects.forEach((el) => {
     if (el.className === "project-button-wrapper") {
       el.style.opacity = "0%";
@@ -523,8 +523,8 @@ const mouseLeave = (e) => {
 const touchLeave = (e) => {
   // Gets closest project and sets the image to 100% opacity
   // sets the buttons to 0% opacity
-  e.stopPropagation();
-  e.preventDefault();
+  // e.stopPropagation();
+  // e.preventDefault();
   let closest = e.target.closest(".project-format");
   if (openEffects.length && closest && !closest.contains(e.target)) {
     console.log("fired");
