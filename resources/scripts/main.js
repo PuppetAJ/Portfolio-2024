@@ -206,15 +206,6 @@ const removeNavModal = (lastModalOpen) => {
   parentWrapper.removeEventListener("mouseout", handleNavBar);
 };
 
-const isChild = (parent, child) => {
-  for (let i = 0; i < parent.children.length; i++) {
-    if (parent.children[i] === child) {
-      return true;
-    }
-  }
-  return false;
-};
-
 const handleNavBar = (e) => {
   if (e.relatedTarget) {
     // if wrapper protects against page exit errors
@@ -225,7 +216,7 @@ const handleNavBar = (e) => {
       ) {
         if (
           e.relatedTarget.classList[1] !== dropdown.classList[1] &&
-          !isChild(dropdown, e.relatedTarget)
+          !dropdown.contains(e.relatedTarget)
         ) {
           const lastModalOpen = testLastModal(
             e.relatedTarget.classList[1],
@@ -398,7 +389,7 @@ const navTouchExit = (e) => {
   if (
     !e.target.classList.contains("nav-wrapper") &&
     open.length &&
-    !isChild(nav, e.target)
+    !nav.contains(e.target)
   ) {
     removeNavModal(false);
   }
