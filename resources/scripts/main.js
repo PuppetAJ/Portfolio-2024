@@ -490,6 +490,22 @@ const mouseLeave = (e) => {
   }
 };
 
+const touchLeave = (e) => {
+  // Gets closest project and sets the image to 100% opacity
+  // sets the buttons to 0% opacity
+  const el = e.target.closest(".project-format");
+  const children = el.firstChild.children;
+  for (const child of children) {
+    if (child.className === "project-button-wrapper") {
+      child.style.opacity = "0%";
+      child.style.transition = "all 0.4s";
+    } else {
+      child.style.opacity = "100%";
+      child.style.transition = "all 0.4s";
+    }
+  }
+};
+
 const createProject = (props) => {
   const {
     languages,
