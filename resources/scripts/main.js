@@ -171,6 +171,7 @@ setup();
 const parentList = document.querySelector(".nav-list");
 const parentWrapper = document.querySelector(".nav-wrapper");
 let open = [];
+let openEffects = [];
 let dropdown, lastModal, playTransition;
 
 const getElementDimensions = (el, parent) => {
@@ -466,9 +467,11 @@ const mouseEnter = (e) => {
     if (child.className === "project-button-wrapper") {
       child.style.opacity = "100%";
       child.style.transition = "all 0.4s";
+      openEffects.push(child);
     } else {
       child.style.opacity = "12%";
       child.style.transition = "all 0.4s";
+      openEffects.push(child);
     }
   }
 };
@@ -477,34 +480,47 @@ const mouseEnter = (e) => {
 const mouseLeave = (e) => {
   // Gets closest project and sets the image to 100% opacity
   // sets the buttons to 0% opacity
-  const el = e.target.closest(".project-format");
-  const children = el.firstChild.children;
-  for (const child of children) {
-    if (child.className === "project-button-wrapper") {
-      child.style.opacity = "0%";
-      child.style.transition = "all 0.4s";
+  // const el = e.target.closest(".project-format");
+  // const children = el.firstChild.children;
+  // for (const child of children) {
+  //   if (child.className === "project-button-wrapper") {
+  //     child.style.opacity = "0%";
+  //     child.style.transition = "all 0.4s";
+  //   } else {
+  //     child.style.opacity = "100%";
+  //     child.style.transition = "all 0.4s";
+  //   }
+  // }
+
+  // Replacement logic using memory
+  openEffects.forEach((el) => {
+    if (el.className === "project-button-wrapper") {
+      el.style.opacity = "0%";
+      el.style.transition = "all 0.4s";
     } else {
-      child.style.opacity = "100%";
-      child.style.transition = "all 0.4s";
+      el.style.opacity = "100%";
+      el.style.transition = "all 0.4s";
     }
-  }
+  });
 };
 
 const touchLeave = (e) => {
   // Gets closest project and sets the image to 100% opacity
   // sets the buttons to 0% opacity
-  const el = e.target.closest(".project-format");
-  const children = el.firstChild.children;
-  for (const child of children) {
-    if (child.className === "project-button-wrapper") {
-      child.style.opacity = "0%";
-      child.style.transition = "all 0.4s";
-    } else {
-      child.style.opacity = "100%";
-      child.style.transition = "all 0.4s";
-    }
+  if (openEffects.length) {
+    openEffects.forEach((el) => {
+      if (el.className === "project-button-wrapper") {
+        el.style.opacity = "0%";
+        el.style.transition = "all 0.4s";
+      } else {
+        el.style.opacity = "100%";
+        el.style.transition = "all 0.4s";
+      }
+    });
   }
 };
+
+document.addEventListener("touchstart", touchLeave);
 
 const createProject = (props) => {
   const {
