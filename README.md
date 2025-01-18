@@ -45,12 +45,6 @@ This project is licensed under the MIT License. See [LICENSE.md](./LICENSE.md) f
 
 ---
 
-## Contributing
-
-![](https://img.shields.io/badge/Contribution-CC%20v2.1-blueviolet)
-
-This project follows the contributor covenant contribution guidelines. See [here](https://www.contributor-covenant.org/version/2/1/code_of_conduct/)
-
 ## Questions
 
 If you have any questions or concerns visit my [github](https://github.com/PuppetAJ) or send me an email at <adrianj.web@gmail.com>.
