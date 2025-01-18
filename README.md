@@ -38,7 +38,6 @@ In order to use this project, please make sure you download all files into a dir
 
 - Adrian Jimenez
 - [Spiral](https://codepen.io/hakimel/pen/QdWpRv?utm_source=extension&utm_medium=click&utm_campaign=muzli)
-- [Design](https://safetpojskic.com/)
 
 ## License
 
