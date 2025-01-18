@@ -15,7 +15,6 @@ This project is a simple one page portfolio using HTML, CSS, and JavaScript. Ins
 - [Usage](#usage)
 - [Credits](#credits)
 - [License](#license)
-- [Contributing](#contributing)
 - [Questions](#questions)
 
 ## Installation
